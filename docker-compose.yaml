@@ -1,7 +1,7 @@
 x-service-templates:
   base-app: &base-app
     network_mode: "none"
-    image: 7se7en/rinha-de-backend-2026-app-asm:v0
+    image: 7se7en/rinha-de-backend-2026-app-asm:v1
     volumes:
       - sockets:/app/sockets:rw
     deploy:
@@ -23,7 +23,7 @@ services:
       APP_SOCK_PATH: "sockets/two.sock"
 
   lb:
-    image: 7se7en/rinha-de-backend-2026-app-lb:v0
+    image: 7se7en/rinha-de-backend-2026-app-lb:v1
     ports:
       - "9999:80"
     volumes:
