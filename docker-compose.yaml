@@ -8,27 +8,31 @@ x-service-templates:
       resources:
         limits:
           cpus: "0.45"
-          memory: 125M
+          memory: 16MB
 
 services:
   app-1:
     <<: *base-app
+    cpuset: "0"
     environment:
       APP_ID: "APP_1"
       APP_SOCK_PATH: "sockets/one.sock"
   app-2:
     <<: *base-app
+    cpuset: "1"
     environment:
       APP_ID: "APP_2"
       APP_SOCK_PATH: "sockets/two.sock"
 
   lb:
     image: 7se7en/rinha-de-backend-2026-app-lb:v1
+    cpuset: "2,3"
     ports:
       - "9999:80"
     volumes:
       - sockets:/sockets
     ulimits:
+      memlock: -1
       nofile:
         soft: 65536
         hard: 200000
@@ -41,7 +45,7 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "100MB"
+          memory: "16MB"
 
 volumes:
   sockets:
