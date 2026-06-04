@@ -13,7 +13,7 @@ x-service-templates:
     deploy:
       resources:
         limits:
-          cpus: "0.4"
+          cpus: "0.25"
           memory: 140MB
 
 services:
@@ -51,7 +51,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.5"
           memory: "30MB"
 
 volumes:
