@@ -1,0 +1,18 @@
+FROM alpine:latest AS builder
+
+RUN apk add --no-cache build-base linux-headers
+
+WORKDIR /build
+COPY lb_ring.c .
+COPY lb_shared.h .
+COPY Makefile .
+
+RUN make build-lb
+
+FROM alpine:latest
+
+WORKDIR /app
+COPY --from=builder /build/lb .
+
+ENTRYPOINT ["./lb"]
+
